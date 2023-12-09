@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <!-- what products -->
+    what product would you like to buy?:<input id="ItemName" type="text" value="bread"><br>
+    How many would you like?<input id="NumOfProducts" type="number" value="7">
+    <!-- send/add button -->
+    <br>
+    <button id="AddBtn" onclick="add()  "> add</button>
+<div id="display" style="background-color: blueviolet;"></div>
+    <script>
+        const MY_SERVER = "http://localhost:3000/Items"
+        let ItemArray = []
+        function add() {
+            axios.post(MY_SERVER, {
+                NameOfItem: ItemName.value,
+                NumOfProducts: NumOfProducts.value,
+            })
+            read()
+           
+        }
+
+        async function read() {
+            ItemArray = await axios.get(MY_SERVER)
+            ItemArray = ItemArray.data
+            console.table(ItemArray);
+            buildDisplay()
+        }
+        function buildDisplay() {
+            display.innerHTML= ItemArray.map(items=> `
+            <div>
+                Item: ${items.ItemName},
+                Count:${items.NumOfProducts}
+                <button onclick=del(${items.id})>del</button>
+                <button onclick=update(${items.id})>upd</button>
+                </div>`).join("")
+
+            read()
+        }
+
+
+
+    </script>
+</body>
+
+</html>

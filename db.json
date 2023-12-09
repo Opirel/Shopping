@@ -1,0 +1,14 @@
+{
+  "Items": [
+    {
+      "NameOfItem": "wheat",
+      "NumOfProducts": "2",
+      "id": 1
+    },
+    {
+      "NameOfItem": "bread",
+      "NumOfProducts": "7",
+      "id": 2
+    }
+  ]
+}
